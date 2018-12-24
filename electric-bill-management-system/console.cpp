@@ -4,7 +4,6 @@
  */
 
 #include "console.h"
-#include <cstdlib>
 #include <rang.hpp>
 
 // !Substitute typedef HANDLE to void* because of misc-misplaced-const
@@ -41,8 +40,33 @@ void console::SetupConsole() {
 	setControlMode(rang::control::Force);
 }
 
-void console::ClearConsoleScreen() {
-	system("cls");
+bool console::ClearConsoleScreen(void* handle) {
+	using fmt::arg;
+	using fmt::print;
+
+	auto result = false;
+
+	CONSOLE_SCREEN_BUFFER_INFO csbi{};
+	if (GetConsoleScreenBufferInfo(handle, &csbi) != 0) {
+		const auto total_char_in_buffer = csbi.dwSize.X * csbi.dwSize.Y;
+		DWORD total_char_written{};
+		const auto top_left = COORD{0, 0};
+		if (FillConsoleOutputCharacter(handle,
+																	 static_cast<TCHAR>(' '),
+																	 total_char_in_buffer,
+																	 top_left,
+																	 &total_char_written) != 0 &&
+				GetConsoleScreenBufferInfo(handle, &csbi) != 0 &&
+				FillConsoleOutputAttribute(handle,
+																	 csbi.wAttributes,
+																	 total_char_in_buffer,
+																	 top_left,
+																	 &total_char_written) != 0 &&
+				SetConsoleCursorPosition(handle, top_left) != 0) {
+			result = true;
+		}
+	}
+	return result;
 }
 
 std::optional<COORD> console::GetConsoleCursorPosition(void* handle) {

@@ -6,7 +6,7 @@
 
 namespace console {
 	void SetupConsole();
-	void ClearConsoleScreen();
+	bool ClearConsoleScreen(HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE));
 	std::optional<COORD> GetConsoleCursorPosition(
 			HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE));
 	BOOL SetConsoleCursorAt(SHORT x,
