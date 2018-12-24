@@ -1,0 +1,1 @@
+delete from Client where full_name = 'Bruce Wayne';

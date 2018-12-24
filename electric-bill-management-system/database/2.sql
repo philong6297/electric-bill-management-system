@@ -1,0 +1,1 @@
+select * from Client where full_name = 'Nguyễn Thành Công'

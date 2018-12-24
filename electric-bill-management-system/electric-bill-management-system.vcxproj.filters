@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{fae47741-4b3d-41e1-b1b5-0c8b0b541639}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Menu">
+      <UniqueIdentifier>{828486a3-eca7-4fcf-ba32-1810aff38a68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\View">
+      <UniqueIdentifier>{0720154b-d41f-40e1-942d-f34200a2bccc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Precompiled Headers">
+      <UniqueIdentifier>{bd9fba7f-71f5-4fce-83b2-79fe00bd08d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Program">
+      <UniqueIdentifier>{daab8a57-e38c-4341-9fda-f4196a05c724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Utilities">
+      <UniqueIdentifier>{b4d95dae-8bfa-4a5a-9ef8-a7950486879d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="add_user_view.h">
+      <Filter>Headers\View</Filter>
+    </QtMoc>
+    <QtMoc Include="exit_view.h">
+      <Filter>Headers\View</Filter>
+    </QtMoc>
+    <QtMoc Include="main_view.h">
+      <Filter>Headers\View</Filter>
+    </QtMoc>
+    <QtMoc Include="view_base.h">
+      <Filter>Headers\View</Filter>
+    </QtMoc>
+    <QtMoc Include="menu_base.h">
+      <Filter>Headers\Menu</Filter>
+    </QtMoc>
+    <QtMoc Include="menu_item.h">
+      <Filter>Headers\Menu</Filter>
+    </QtMoc>
+    <QtMoc Include="sub_menu.h">
+      <Filter>Headers\Menu</Filter>
+    </QtMoc>
+    <QtMoc Include="program.h">
+      <Filter>Headers\Program</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="view.h">
+      <Filter>Headers\View</Filter>
+    </ClInclude>
+    <ClInclude Include="view_defines.h">
+      <Filter>Headers\View</Filter>
+    </ClInclude>
+    <ClInclude Include="console.h">
+      <Filter>Headers\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Headers\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="menu_style.h">
+      <Filter>Headers\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Headers\Precompiled Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="defines.inl">
+      <Filter>Headers\Precompiled Headers</Filter>
+    </None>
+    <None Include="macros.inl">
+      <Filter>Headers\Precompiled Headers</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main_view.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="exit_view.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="console.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="view_base.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sub_menu.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="program.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_style.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_item.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_base.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="add_user_view.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
