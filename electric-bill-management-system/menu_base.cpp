@@ -2,124 +2,87 @@
  * This is a personal academic project. Dear PVS-Studio, please check it.
  * PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
  */
-
 #include "menu_base.h"
 #include "menu.h"
-using menu::get_style;
 using menu::MenuBase;
-using menu::reset_style;
 using menu::SubMenu;
 namespace {
-	auto child_level_of(const SubMenu* parent) -> UnsignedInteger {
-		UnsignedInteger result = 0;
-		if (parent != nullptr) {
-			result = parent->GetLevel() + 1;
-		}
+	auto get_level_by_parent_level(const SubMenu* parent) {
+		const auto result = parent != nullptr ? parent->GetLevel() + 1U : 0U;
 		return result;
 	}
 
-	auto last_child_index_of(const SubMenu* parent)
-			-> std::optional<UnsignedInteger> {
-		std::optional<UnsignedInteger> result{};
-		if (parent != nullptr && !parent->children().isEmpty()) {
-			result = parent->children().size();
+	auto get_last_child_order_of(const SubMenu* parent) {
+		std::optional<SignedInteger> result{};
+		if (parent != nullptr) {
+			result = parent->children().size() - 1;
 		}
 		return result;
 	}
 }  // namespace
-
-// MenuBase -------------------------------------------------------------------
 MenuBase::MenuBase(const Utf8StringView title, SubMenu* parent)
-		: QObject(parent),
-			title_{title.data()},
-			level_{child_level_of(parent)},
-			id_{last_child_index_of(parent)},
-			is_focus_{false} {}
+		: QObject{parent},
+			title_{title},
+			level_{get_level_by_parent_level(parent)},
+			child_order_{get_last_child_order_of(parent)} {}
 
-UnsignedInteger MenuBase::GetLevel() const {
-	return level_;
+MenuBase::~MenuBase() = default;
+
+void MenuBase::SetTile(const Utf8StringView title) {
+	title_ = title;
 }
 
 Utf8String MenuBase::GetTitle() const {
 	return title_;
 }
 
-void MenuBase::SetTitle(const Utf8StringView title) {
-	title_ = title;
+UnsignedInteger MenuBase::GetLevel() const {
+	return level_;
 }
 
-std::optional<SignedInteger> MenuBase::GetId() const {
-	return id_;
+void MenuBase::SetParent(SubMenu* parent) {
+	setParent(parent);
+}
+
+std::optional<SignedInteger> MenuBase::GetChildOrder() const {
+	return child_order_;
 }
 
 bool MenuBase::HasParent() const {
-	return id_.has_value();
+	return GetParent() != nullptr && child_order_.has_value();
 }
 
-void MenuBase::SetParent(SubMenu* new_parent) {
-	setParent(new_parent);
-	on_parent_changed(new_parent);
+SubMenu* MenuBase::GetParent() const {
+	return qobject_cast<SubMenu*>(parent());
 }
 
-bool MenuBase::IsFocus() const {
-	return is_focus_;
-}
-
-void MenuBase::SetFocus(const bool is_focus) {
-	is_focus_ = is_focus;
-}
-
-MenuBase* MenuBase::NextSibling() const {
+MenuBase* MenuBase::GetNextSibling() const {
 	MenuBase* result = nullptr;
 	if (HasParent()) {
-		result = SiblingAt(id_.value() + 1);
+		result = GetSiblingByOrder(child_order_.value() + 1U);
 	}
 	return result;
 }
 
-MenuBase* MenuBase::PreviousSibling() const {
+MenuBase* MenuBase::GetPreviousSibling() const {
 	MenuBase* result = nullptr;
 	if (HasParent()) {
-		result = SiblingAt(id_.value() - 1);
+		result = GetSiblingByOrder(child_order_.value() - 1U);
 	}
 	return result;
 }
 
-MenuBase* MenuBase::SiblingAt(const SignedInteger index) const {
+MenuBase* MenuBase::GetSiblingByOrder(const SignedInteger child_order) const {
 	MenuBase* result = nullptr;
-	// have a parent
-	if (HasParent() && index > 0 && index <= parent()->children().size()) {
-		result = qobject_cast<MenuBase*>(parent()->children().at(index - 1));
+	if (HasParent()) {
+		const auto& children_list = GetParent()->children();
+		if (child_order >= 0 && child_order < children_list.size()) {
+			result = qobject_cast<MenuBase*>(children_list.at(child_order));
+		}
 	}
 	return result;
 }
 
-Utf8String MenuBase::GetCurrentContent() const {
-	using fmt::arg;
-	using fmt::format;
-	using fmt::to_string;
-
-	const auto index =
-			Utf8String{id_.has_value() ? to_string(id_.value()) + "." : ""};
-	const auto align = format(u8"{content:\t>{level}}",
-														arg(u8"content", u8""),
-														arg(u8"level", GetLevel()));
-	const auto title = GetTitle();
-	const auto style = get_style(*this);
-
-	return format(u8"{style}{align}{index}{title}{reset_style}\n",
-								arg(u8"index", index),
-								arg(u8"align", align),
-								arg(u8"title", title),
-								arg(u8"style", style),
-								arg(u8"reset_style", reset_style()));
-}
-
-void MenuBase::on_parent_changed(const SubMenu* new_parent) {
-	level_ = child_level_of(new_parent);
-	id_ = last_child_index_of(new_parent);
-}
-
-void MenuBase::Show() const {
-	fmt::print(u8"{}", *this);
+menu::MenuType MenuBase::GetType() const {
+	return MENU_BASE;
 }

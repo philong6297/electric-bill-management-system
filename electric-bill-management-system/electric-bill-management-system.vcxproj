@@ -60,7 +60,7 @@
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName);$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName);$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
@@ -101,7 +101,7 @@
     </Link>
     <QtMoc>
       <Define>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_CORE_LIB</Define>
-      <IncludePath>$(ProjectDir)\;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include</IncludePath>
+      <IncludePath>$(ProjectDir);$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName);$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.\;%(AdditionalIncludeDirectories)</IncludePath>
       <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
       <Include>
@@ -124,7 +124,7 @@
       <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat />
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName);$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName);$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
@@ -165,7 +165,7 @@
     </Link>
     <QtMoc>
       <Define>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB</Define>
-      <IncludePath>$(ProjectDir)\;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include</IncludePath>
+      <IncludePath>$(ProjectDir);$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName);$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.\;%(AdditionalIncludeDirectories)</IncludePath>
       <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
       <Include>
@@ -183,42 +183,56 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="add_user_view.cpp" />
     <ClCompile Include="console.cpp" />
-    <ClCompile Include="exit_view.cpp" />
+    <ClCompile Include="console_listener.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_view.cpp" />
     <ClCompile Include="menu_base.cpp" />
     <ClCompile Include="menu_item.cpp" />
+    <ClCompile Include="menu_renderer.cpp" />
     <ClCompile Include="menu_style.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="program.cpp" />
     <ClCompile Include="sub_menu.cpp" />
     <ClCompile Include="view_base.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="main_view.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="menu_base.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="menu_item.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="console.h" />
-    <ClInclude Include="menu.h" />
-    <ClInclude Include="menu_style.h" />
+    <QtMoc Include="main_view.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;.</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;.</IncludePath>
+    </QtMoc>
     <ClInclude Include="view.h" />
-    <ClInclude Include="view_defines.h" />
-    <QtMoc Include="sub_menu.h" />
-    <QtMoc Include="program.h" />
-    <QtMoc Include="exit_view.h" />
-    <QtMoc Include="view_base.h" />
-    <QtMoc Include="add_user_view.h" />
+    <QtMoc Include="view_base.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;.</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;.</IncludePath>
+    </QtMoc>
+    <QtMoc Include="console_listener.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include</IncludePath>
+    </QtMoc>
+    <ClInclude Include="menu.h" />
+    <QtMoc Include="menu_base.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;.</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;.</IncludePath>
+    </QtMoc>
+    <ClInclude Include="menu_defines.h" />
+    <QtMoc Include="menu_item.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;.</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;.</IncludePath>
+    </QtMoc>
+    <ClInclude Include="menu_renderer.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;.</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;.</IncludePath>
+    </ClInclude>
+    <ClInclude Include="menu_style.h" />
+    <ClInclude Include="message.h" />
+    <QtMoc Include="sub_menu.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;.</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;.</IncludePath>
+    </QtMoc>
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>

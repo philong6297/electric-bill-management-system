@@ -1,67 +1,36 @@
 #ifndef MENU_BASE_H
 #define MENU_BASE_H
 #pragma once
-
-#include <fmt/ostream.h>
-#include "menu_style.h"
+#include "menu_defines.h"
 
 namespace menu {
 	class SubMenu;
-	class MenuBase;
-
 	class MenuBase : public QObject {
 		Q_OBJECT
-
 	 public:
-		explicit MenuBase() = delete;
 		explicit MenuBase(Utf8StringView title, SubMenu* parent = nullptr);
-		~MenuBase() override = default;
+		~MenuBase() override;
 		MAKE_NON_COPYABLE_NON_MOVEABLE(MenuBase)
 
-		void Show() const;
-
-		UnsignedInteger GetLevel() const;
-
+		void SetTile(Utf8StringView title);
 		Utf8String GetTitle() const;
-
-		void SetTitle(Utf8StringView title);
-
-		std::optional<SignedInteger> GetId() const;
-
+		UnsignedInteger GetLevel() const;
+		void SetParent(SubMenu* parent);
+		std::optional<SignedInteger> GetChildOrder() const;
 		bool HasParent() const;
-
-		void SetParent(SubMenu* new_parent);
-
-		bool IsFocus() const;
-
-		void SetFocus(bool is_focus);
-
-		MenuBase* NextSibling() const;
-
-		MenuBase* PreviousSibling() const;
-
-		MenuBase* SiblingAt(SignedInteger index) const;
-
-		friend std::ostream& operator<<(std::ostream& os, const MenuBase& menu) {
-			os << menu.GetCurrentContent() << reset_style();
-			return os;
-		}
-
-		virtual Utf8String GetCurrentContent() const;
+		SubMenu* GetParent() const;
+		MenuBase* GetNextSibling() const;
+		MenuBase* GetPreviousSibling() const;
+		MenuBase* GetSiblingByOrder(SignedInteger child_order) const;
+		virtual MenuType GetType() const;
 
 	 private:
+		using QObject::parent;
 		using QObject::setParent;
-
 		Utf8String title_;
-
 		UnsignedInteger level_;
-
-		std::optional<SignedInteger> id_;
-
-		bool is_focus_;
-
-		void on_parent_changed(const SubMenu* new_parent);
+		std::optional<SignedInteger> child_order_;
 	};
-
 }  // namespace menu
+
 #endif  // !MENU_BASE_H

@@ -4,8 +4,8 @@
  */
 
 #include "console.h"
+#include <QtCore/QProcess>
 #include <rang.hpp>
-
 // !Substitute typedef HANDLE to void* because of misc-misplaced-const
 
 // helpers
@@ -32,41 +32,27 @@ namespace {
 	}
 }  // namespace
 
-void console::SetupConsole() {
+void console::SetupConsole(const bool show_cursor) {
 	SetConsoleOutputCP(CP_UTF8);
 	SetConsoleCP(CP_UTF8);
 
 	setWinTermMode(rang::winTerm::Ansi);
 	setControlMode(rang::control::Force);
+
+	ShowConsoleCursor(show_cursor);
 }
 
-bool console::ClearConsoleScreen(void* handle) {
-	using fmt::arg;
-	using fmt::print;
+void console::ShowConsoleCursor(const bool show, void* handle) {
+	CONSOLE_CURSOR_INFO cursorInfo;
 
-	auto result = false;
+	GetConsoleCursorInfo(handle, &cursorInfo);
+	cursorInfo.bVisible = static_cast<BOOL>(show);  // set the cursor visibility
+	SetConsoleCursorInfo(handle, &cursorInfo);
+}
 
-	CONSOLE_SCREEN_BUFFER_INFO csbi{};
-	if (GetConsoleScreenBufferInfo(handle, &csbi) != 0) {
-		const auto total_char_in_buffer = csbi.dwSize.X * csbi.dwSize.Y;
-		DWORD total_char_written{};
-		const auto top_left = COORD{0, 0};
-		if (FillConsoleOutputCharacter(handle,
-																	 static_cast<TCHAR>(' '),
-																	 total_char_in_buffer,
-																	 top_left,
-																	 &total_char_written) != 0 &&
-				GetConsoleScreenBufferInfo(handle, &csbi) != 0 &&
-				FillConsoleOutputAttribute(handle,
-																	 csbi.wAttributes,
-																	 total_char_in_buffer,
-																	 top_left,
-																	 &total_char_written) != 0 &&
-				SetConsoleCursorPosition(handle, top_left) != 0) {
-			result = true;
-		}
-	}
-	return result;
+bool console::ClearConsoleScreen() {
+	const auto result = QProcess::execute(u8"cmd /c cls");
+	return result != -2 && result != -1;
 }
 
 std::optional<COORD> console::GetConsoleCursorPosition(void* handle) {

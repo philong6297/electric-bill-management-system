@@ -5,8 +5,10 @@
 #include <fmt/ostream.h>
 
 namespace console {
-	void SetupConsole();
-	bool ClearConsoleScreen(HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE));
+	void SetupConsole(bool show_cursor = true);
+	void ShowConsoleCursor(bool show,
+												 HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE));
+	bool ClearConsoleScreen();
 	std::optional<COORD> GetConsoleCursorPosition(
 			HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE));
 	BOOL SetConsoleCursorAt(SHORT x,

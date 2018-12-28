@@ -3,11 +3,13 @@
  * PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
  */
 
-#include "program.h"
-
+#include <QtCore/QCoreApplication>
+#include "view.h"
 int main() {
-	Program main;
+	char** argv = nullptr;
+	auto argc = 0;
+	[[maybe_unused]] QCoreApplication a(argc, argv);
+	view::MainView main;
 	main.Run();
-
-	return 0;
+	return QCoreApplication::exec();
 }
