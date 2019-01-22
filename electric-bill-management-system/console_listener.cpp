@@ -2,9 +2,9 @@
  * This is a personal academic project. Dear PVS-Studio, please check it.
  * PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
  */
-#include "pch.h"
 #include "console_listener.h"
 #include <Windows.h>
+#include <iostream>
 // helpers
 namespace {
 	std::optional<KEY_EVENT_RECORD> get_keyboard_event_record(void* h) {
@@ -29,41 +29,58 @@ namespace {
 	}
 }  // namespace
 
-ConsoleListener::ConsoleListener(QObject* parent)
+ConsoleListener::ConsoleListener(QObject* parent, const ListenType type)
 		: QObject{parent},
-			notifier_{
-					std::make_unique<QWinEventNotifier>(GetStdHandle(STD_INPUT_HANDLE),
-																							this)} {
-	connect(notifier_.get(),
-					&QWinEventNotifier::activated,
-					this,
-					&ConsoleListener::ListenKeyEvent);
+			notifier_{new QWinEventNotifier{GetStdHandle(STD_INPUT_HANDLE), this}} {
+	switch (type) {
+		case SINGLE_KEY:
+			connect(notifier_,
+							&QWinEventNotifier::activated,
+							this,
+							&ConsoleListener::ListenKeyEvent);
+			break;
+		case STRING:
+			connect(notifier_,
+							&QWinEventNotifier::activated,
+							this,
+							&ConsoleListener::ListenStringEvent);
+			break;
+		default:
+			// do nothing
+			break;
+	}
 }
 
 ConsoleListener::~ConsoleListener() = default;
 
-void ConsoleListener::ListenKeyEvent([[maybe_unused]] const Qt::HANDLE handle) {
-	auto result = ControlKeyboard::INVALID_INPUT;
+void ConsoleListener::ListenKeyEvent(const Qt::HANDLE handle) {
+	auto result = INVALID_INPUT;
 	if (const auto keyboard_event = get_keyboard_event_record(handle);
 			keyboard_event.has_value()) {
 		const auto key = keyboard_event.value();
 		switch (key.wVirtualKeyCode) {
 			case VK_UP:
-				result = ControlKeyboard::UP;
+				result = UP;
 				break;
 			case VK_DOWN:
-				result = ControlKeyboard::DOWN;
+				result = DOWN;
 				break;
 			case VK_RETURN:
-				result = ControlKeyboard::ENTER;
+				result = ENTER;
 				break;
 			case VK_ESCAPE:
-				result = ControlKeyboard::ESC;
+				result = ESC;
 				break;
 			default:
 				// do nothing
 				break;
 		}
 	}
-	emit KeyEventReceived(result);
+	emit SingleKeyReceived(result);
+}
+
+void ConsoleListener::ListenStringEvent([[maybe_unused]] Qt::HANDLE handle) {
+	Utf8String line{};
+	std::getline(std::cin, line);
+	emit StringReceived(line);
 }

@@ -12,7 +12,7 @@ namespace menu {
 		~SubMenu() override;
 		MAKE_NON_COPYABLE_NON_MOVEABLE(SubMenu)
 
-		MenuItem* AddMenuItem(Utf8StringView title);
+		MenuItem* AddMenuItem(Utf8StringView title, UnsignedInteger id);
 		SubMenu* AddSubMenu(Utf8StringView title);
 		MenuType GetType() const override;
 	};

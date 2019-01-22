@@ -5,9 +5,9 @@
 namespace menu {
 	class MenuBase;
 	struct MenuRenderer final {
-		static Utf8String Render(const MenuBase* menu,
-														 UnsignedInteger align,
-														 MenuState state);
+		static Utf8String GetFormattedString(const MenuBase* menu,
+																				 UnsignedInteger align,
+																				 MenuState state);
 	};
 }  // namespace menu
 

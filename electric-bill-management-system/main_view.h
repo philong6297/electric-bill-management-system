@@ -20,22 +20,42 @@ namespace view {
 		MAKE_NON_COPYABLE_NON_MOVEABLE(MainView)
 		void Run() override;
 
+		// cac loai message gui toi Program
+		enum MenuItemId : UnsignedInteger {
+			ADD_USER,
+			EDIT_USER,
+			DELETE_USER,
+			SEARCH_INFO,
+			SUMMARY_PAID_BILL,
+			SUMMARY_NON_PAID_BILL,
+			PRINT_BILL,
+			EXIT
+		};
+
+	 signals:
+		// send message toi program
+		void MenuItemSelected(UnsignedInteger menu_item_id);
+
 	 private:
 		std::future<void> initialize_handle_;
-		std::unique_ptr<ConsoleListener> listener_;
+
+		// console listener
+		gsl::owner<ConsoleListener*> listener_;
+
 		std::vector<std::unique_ptr<menu::MenuBase>> menu_ui_;
-		gsl::owner<menu::MenuBase*> current_focus_ = nullptr;
+		gsl::owner<const menu::MenuBase*> current_focus_ = nullptr;
 		std::optional<size_t> current_menu_index_ = std::nullopt;
-		static constexpr auto tabs = 2;
-		void RenderAll() const;
-		Utf8String Render(const menu::MenuBase* menu) const;
+		void Render();
+		Utf8String GetFormattedString(const menu::MenuBase* menu) const;
 		void Initialize();
 
-		void OnUpKey();
-		void OnDownKey();
-		void OnEnterKey();
-		void OnEscapeKey();
+		// *xu ly cac input
+		void OnKeyboardEventUp();
+		void OnKeyboardEventDown();
+		void OnKeyboardEventEnter();
+		void OnKeyboardEventEscape();
 	 private slots:
+		// slot nhan signal tu console_listener
 		void OnKeyboardEventReceived(ConsoleListener::ControlKeyboard key);
 	};
 }  // namespace view

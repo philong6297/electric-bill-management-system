@@ -1,1 +1,0 @@
-insert into Client values ('21', 'Đỗ Hồng Giang', '1456320879', 'Vĩnh Hưng', '0235641789', '10/30/2018', '6/9/2018')

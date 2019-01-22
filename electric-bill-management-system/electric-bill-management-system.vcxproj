@@ -56,11 +56,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_CORE_LIB;QT_SQL_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName);$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName);$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.\;$(QTDIR)\include\QtSql;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
@@ -94,14 +94,14 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Sqld.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <QtMoc>
-      <Define>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_CORE_LIB</Define>
-      <IncludePath>$(ProjectDir);$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName);$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.\;%(AdditionalIncludeDirectories)</IncludePath>
+      <Define>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_CORE_LIB;QT_SQL_LIB;%(PreprocessorDefinitions)</Define>
+      <IncludePath>$(ProjectDir);$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName);$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.\;$(QTDIR)\include\QtSql;%(AdditionalIncludeDirectories)</IncludePath>
       <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
       <Include>
@@ -121,10 +121,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_SQL_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat />
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName);$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName);$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.\;$(QTDIR)\include\QtSql;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
@@ -158,14 +158,14 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Sql.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LinkTimeCodeGeneration>UseFastLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <QtMoc>
-      <Define>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB</Define>
-      <IncludePath>$(ProjectDir);$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName);$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.\;%(AdditionalIncludeDirectories)</IncludePath>
+      <Define>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_SQL_LIB;%(PreprocessorDefinitions)</Define>
+      <IncludePath>$(ProjectDir);$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName);$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.\;$(QTDIR)\include\QtSql;%(AdditionalIncludeDirectories)</IncludePath>
       <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
       <Include>
@@ -183,8 +183,12 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="add_user_view.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="console_listener.cpp" />
+    <ClCompile Include="delete_user_view.cpp" />
+    <ClCompile Include="edit_user_view.cpp" />
+    <ClCompile Include="exit_view.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_view.cpp" />
     <ClCompile Include="menu_base.cpp" />
@@ -195,14 +199,60 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="print_bill_view.cpp" />
+    <ClCompile Include="program.cpp" />
+    <ClCompile Include="search_view.cpp" />
     <ClCompile Include="sub_menu.cpp" />
+    <ClCompile Include="summary_view.cpp" />
     <ClCompile Include="view_base.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="add_user_view.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.</IncludePath>
+    </QtMoc>
     <ClInclude Include="console.h" />
     <QtMoc Include="main_view.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;.</IncludePath>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;.</IncludePath>
+    </QtMoc>
+    <QtMoc Include="program.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.</IncludePath>
+    </QtMoc>
+    <QtMoc Include="exit_view.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.</IncludePath>
+    </QtMoc>
+    <QtMoc Include="edit_user_view.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.;$(QTDIR)\include\QtSql</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_CORE_LIB;QT_SQL_LIB</Define>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.;$(QTDIR)\include\QtSql</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_SQL_LIB</Define>
+    </QtMoc>
+    <QtMoc Include="delete_user_view.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.;$(QTDIR)\include\QtSql</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_CORE_LIB;QT_SQL_LIB</Define>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.;$(QTDIR)\include\QtSql</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_SQL_LIB</Define>
+    </QtMoc>
+    <QtMoc Include="search_view.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.;$(QTDIR)\include\QtSql</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_CORE_LIB;QT_SQL_LIB</Define>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.;$(QTDIR)\include\QtSql</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_SQL_LIB</Define>
+    </QtMoc>
+    <QtMoc Include="print_bill_view.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.;$(QTDIR)\include\QtSql</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_CORE_LIB;QT_SQL_LIB</Define>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.;$(QTDIR)\include\QtSql</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_SQL_LIB</Define>
+    </QtMoc>
+    <QtMoc Include="summary_view.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.;$(QTDIR)\include\QtSql</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_CORE_LIB;QT_SQL_LIB</Define>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;$(SolutionDir)\lib\gsl\include;.;$(QTDIR)\include\QtSql</IncludePath>
+      <Define Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;FMT_HEADER_ONLY;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_SQL_LIB</Define>
     </QtMoc>
     <ClInclude Include="view.h" />
     <QtMoc Include="view_base.h">
@@ -228,7 +278,6 @@
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;.</IncludePath>
     </ClInclude>
     <ClInclude Include="menu_style.h" />
-    <ClInclude Include="message.h" />
     <QtMoc Include="sub_menu.h">
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;.</IncludePath>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\.;$(QTDIR)\include;$(ProjectDir)\GeneratedFiles\$(ConfigurationName)\.;$(SolutionDir)\lib\fmt\include;$(SolutionDir)\lib\rang\include;.</IncludePath>
@@ -236,7 +285,8 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="defines.inl" />
+    <None Include="database.inl" />
+    <None Include="common.inl" />
     <None Include="macros.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

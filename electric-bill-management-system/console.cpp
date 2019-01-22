@@ -8,30 +8,6 @@
 #include <rang.hpp>
 // !Substitute typedef HANDLE to void* because of misc-misplaced-const
 
-// helpers
-namespace {
-	std::optional<KEY_EVENT_RECORD> get_keyboard_event_record(void* h) {
-		DWORD cc{};
-		INPUT_RECORD input_record{};
-		std::optional<KEY_EVENT_RECORD> result{};
-		if (h != nullptr) {
-			while (true) {
-				ReadConsoleInput(h, &input_record, 1, &cc);
-				if (input_record.EventType == KEY_EVENT) {
-					if (const auto& key_event =
-									reinterpret_cast<KEY_EVENT_RECORD&>(  // NOLINT
-											input_record.Event);              // NOLINT
-							key_event.bKeyDown != 0) {
-						result = key_event;
-						break;
-					}
-				}
-			}
-		}
-		return result;
-	}
-}  // namespace
-
 void console::SetupConsole(const bool show_cursor) {
 	SetConsoleOutputCP(CP_UTF8);
 	SetConsoleCP(CP_UTF8);
@@ -69,42 +45,35 @@ BOOL console::SetConsoleCursorAt(const SHORT x, const SHORT y, void* handle) {
 	return result;
 }
 
-console::ControlKeyboard console::WaitForKeyboardEvent(void* handle) {
-	auto result = ControlKeyboard::INVALID_INPUT;
-	if (const auto keyboard_event = get_keyboard_event_record(handle);
-			keyboard_event.has_value()) {
-		const auto key = keyboard_event.value();
-		switch (key.wVirtualKeyCode) {
-			case VK_UP:
-				result = ControlKeyboard::UP;
-				break;
-			case VK_DOWN:
-				result = ControlKeyboard::DOWN;
-				break;
-			case VK_RETURN:
-				result = ControlKeyboard::ENTER;
-				break;
-			case VK_ESCAPE:
-				result = ControlKeyboard::ESC;
-				break;
-			default:
-				// do nothing
-				break;
-		}
+Utf8String console::ReadUtf8String(const bool flush_input_before_read) {
+	static constexpr auto MAX_INPUT_LENGTH = 255;
+
+	wchar_t wide_string[MAX_INPUT_LENGTH];
+
+	char utf8_string[MAX_INPUT_LENGTH * 3 + 1];
+
+	DWORD total_char_read{};
+	auto* handle = GetStdHandle(STD_INPUT_HANDLE);
+	if (flush_input_before_read) {
+		FlushConsoleInputBuffer(handle);
 	}
-	return result;
+	ReadConsole(handle, wide_string, MAX_INPUT_LENGTH, &total_char_read, nullptr);
+
+	auto const size = WideCharToMultiByte(CP_UTF8,
+																				0,
+																				wide_string,
+																				total_char_read,
+																				utf8_string,
+																				sizeof(utf8_string),
+																				nullptr,
+																				nullptr);
+	utf8_string[size] = 0;
+	return QString(utf8_string).trimmed().toStdString();
 }
 
-std::ostream& operator<<(
-		std::ostream& os,
-		[[maybe_unused]] const std::optional<COORD>& coordinate) {
-#ifdef _DEBUG
-	if (coordinate.has_value()) {
-		os << '(' << coordinate.value().X << ',' << coordinate.value().Y << ')';
-	}
-	else {
-		os << "(no coordinate)";
-	}
-#endif  // _DEBUG
-	return os;
+SignedInteger console::CountCharacterInUtf8String(Utf8StringView str) {
+	return std::accumulate(
+			str.begin(), str.end(), 0, [](const SignedInteger res, const char ch) {
+				return res + ((ch & 0xc0) != 0x80);
+			});
 }

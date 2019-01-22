@@ -1,5 +1,5 @@
-#ifndef TYPE_DEFINE_H
-#define TYPE_DEFINE_H
+#ifndef COMMON_INL
+#define COMMON_INL
 
 #ifndef PCH_H
 #	error "This file is an extension of pch.h, cannot be used alone"
@@ -12,7 +12,10 @@ inline namespace type {
 	using Utf8String = std::string;
 	using UnsignedInteger = uint_fast32_t;
 	using SignedInteger = int_fast32_t;
+
+	using Callback = std::function<void()>;
 }  // namespace type
+
 #endif  // !PCH_H
 
-#endif  // !TYPE_DEFINE_H
+#endif  // !COMMON_INL

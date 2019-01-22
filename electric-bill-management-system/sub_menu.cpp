@@ -8,8 +8,9 @@ using menu::SubMenu;
 
 SubMenu::~SubMenu() = default;
 
-menu::MenuItem* SubMenu::AddMenuItem(const Utf8StringView title) {
-	return std::make_unique<MenuItem>(title, this).release();
+menu::MenuItem* SubMenu::AddMenuItem(const Utf8StringView title,
+																		 const UnsignedInteger id) {
+	return std::make_unique<MenuItem>(title, id, this).release();
 }
 
 SubMenu* SubMenu::AddSubMenu(const Utf8StringView title) {

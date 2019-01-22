@@ -22,9 +22,6 @@
     <Filter Include="Header Files\Precompiled Headers">
       <UniqueIdentifier>{bd9fba7f-71f5-4fce-83b2-79fe00bd08d4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Precompiled Headers\Message">
-      <UniqueIdentifier>{9c00a9e8-fcde-4150-8261-b70a38f548cb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Program">
       <UniqueIdentifier>{daab8a57-e38c-4341-9fda-f4196a05c724}</UniqueIdentifier>
     </Filter>
@@ -36,9 +33,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="console_listener.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="menu_base.h">
       <Filter>Header Files\Menu</Filter>
     </QtMoc>
@@ -54,6 +48,33 @@
     <QtMoc Include="main_view.h">
       <Filter>Header Files\View</Filter>
     </QtMoc>
+    <QtMoc Include="program.h">
+      <Filter>Header Files\Program</Filter>
+    </QtMoc>
+    <QtMoc Include="exit_view.h">
+      <Filter>Header Files\View</Filter>
+    </QtMoc>
+    <QtMoc Include="add_user_view.h">
+      <Filter>Header Files\View</Filter>
+    </QtMoc>
+    <QtMoc Include="console_listener.h">
+      <Filter>Header Files\Utilities</Filter>
+    </QtMoc>
+    <QtMoc Include="delete_user_view.h">
+      <Filter>Header Files\View</Filter>
+    </QtMoc>
+    <QtMoc Include="edit_user_view.h">
+      <Filter>Header Files\View</Filter>
+    </QtMoc>
+    <QtMoc Include="print_bill_view.h">
+      <Filter>Header Files\View</Filter>
+    </QtMoc>
+    <QtMoc Include="search_view.h">
+      <Filter>Header Files\View</Filter>
+    </QtMoc>
+    <QtMoc Include="summary_view.h">
+      <Filter>Header Files\View</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="console.h">
@@ -61,9 +82,6 @@
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Header Files\Precompiled Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="message.h">
-      <Filter>Header Files\Precompiled Headers\Message</Filter>
     </ClInclude>
     <ClInclude Include="menu.h">
       <Filter>Header Files\Menu</Filter>
@@ -82,10 +100,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="defines.inl">
+    <None Include="macros.inl">
       <Filter>Header Files\Precompiled Headers</Filter>
     </None>
-    <None Include="macros.inl">
+    <None Include="database.inl">
+      <Filter>Header Files\Precompiled Headers</Filter>
+    </None>
+    <None Include="common.inl">
       <Filter>Header Files\Precompiled Headers</Filter>
     </None>
   </ItemGroup>
@@ -121,6 +142,30 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main_view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="program.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="exit_view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="add_user_view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="edit_user_view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="delete_user_view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="search_view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="print_bill_view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="summary_view.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

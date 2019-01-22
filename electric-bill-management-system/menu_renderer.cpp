@@ -7,9 +7,9 @@
 using menu::MenuBase;
 using menu::MenuRenderer;
 using menu::MenuState;
-Utf8String MenuRenderer::Render(const MenuBase* menu,
-																const UnsignedInteger align,
-																const MenuState state) {
+Utf8String MenuRenderer::GetFormattedString(const MenuBase* menu,
+																						const UnsignedInteger align,
+																						const MenuState state) {
 	using fmt::arg;
 	using fmt::format;
 	const auto align_string = format(
